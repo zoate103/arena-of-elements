@@ -6,7 +6,7 @@
 | Workspace/repository | `C:\Users\marti\Documents\ChatGPT\Arena of Elemts` |
 | Git remote | `https://github.com/zoate103/arena-of-elements.git` |
 | Setup branch | `codex/setup-agent-environment` |
-| Selected future project | `GameDirectory\LyraStarterGame\LyraStarterGame.uproject` (not yet downloaded) |
+| Selected project | `GameDirectory\LyraStarterGame\LyraStarterGame\LyraStarterGame.uproject` |
 | Preserved user template | `GameDirectory\Arena_of_Elements\Arena_of_Elements.uproject`, UE 5.8, not Lyra |
 | Validation host | `Tools\ValidationHost\ArenaSetupProbe.uproject` |
 | Preferred engine | UE 5.8.1, changelist 56057345 |
@@ -35,11 +35,13 @@ discover engines through project association, registry, LauncherInstalled.dat an
 common locations. An explicit EngineRoot/UE_ROOT may override location, not numeric
 version compatibility. No credentials are needed in stored commands.
 
-Lyra was not found in targeted searches of Documents/Unreal Projects, nearby
+Initially Lyra was not found in targeted searches of Documents/Unreal Projects, nearby
 Documents projects, E:/Dev, E:/Dev/UE, UE Game Assets, Epic installation manifests
 and Epic VaultCache/FabLibrary. ArenaGame (5.8) and ElementalConflux (5.7) are
 separate non-Lyra projects; neither was changed. The user explicitly requested
-Lyra after the new Arena_of_Elements template was discovered.
+Lyra after the new Arena_of_Elements template was discovered. The user subsequently
+downloaded Lyra 5.8. The Launcher added a second LyraStarterGame folder; this
+actual path is preserved and discovered correctly by the tools.
 
 The user-selected GameDirectory location takes precedence over the proposed
 C:/Dev convention. All scripts quote/support this path with spaces. If future

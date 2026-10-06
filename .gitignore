@@ -6,6 +6,9 @@
 **/.idea/
 **/.vscode/
 *.code-workspace
+**/.ignore
+**/Build/Scripts/**/obj/
+**/Build/Scripts/**/bin/
 *.sln
 *.suo
 *.VC.db

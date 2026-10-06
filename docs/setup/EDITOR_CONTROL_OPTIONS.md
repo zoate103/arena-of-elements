@@ -23,6 +23,20 @@ intended local interfaces, require suitable authentication/access control, const
 filesystem and command execution, review logging and secrets, assess NoRedist
 and experimental/runtime packaging implications, and verify teardown behavior.
 
+The subsequently downloaded Lyra 5.8 project already enables Epic's AIAssistant,
+ToolsetRegistry and AllToolsets. These were present in the downloaded descriptor,
+not installed or enabled by this setup. AllToolsets is EditorOnly, experimental
+and NoRedist in the installed engine; its dependencies include MCPClientToolset.
+No credentials, external MCP connections or remote-control endpoints were
+configured by this setup. Reassess these optional stock editor plugins before
+packaging or opening any remote-control access. Engine binaries/source are not
+part of the Git baseline.
+
+The downloaded project also contains LyraExtTool. Its descriptor has an empty
+publisher field, but source copyright identifies Epic. Inspection found an empty
+startup/shutdown module and a Blueprint helper for changing mesh materials; no
+network or startup command-execution logic was observed. It was preserved.
+
 References consulted:
 - https://dev.epicgames.com/documentation/en-us/unreal-engine/scripting-the-unreal-editor-using-python
 - https://dev.epicgames.com/documentation/en-us/unreal-engine/run-automation-tests-in-unreal-engine

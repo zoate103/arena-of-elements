@@ -18,9 +18,23 @@ player/bot accounting and authoritative outcomes. Keep UI free of authority logi
 After baseline success, use controlled network lag/loss and record settings.
 Single-process PIE is convenient but must not be the only multiplayer check.
 
-These steps are prepared, not executed: Lyra is absent. No global editor settings
-or unrelated project preferences were changed. Keep machine-specific PIE settings
-out of tracked runtime config until verified against the actual Lyra version.
+These multiplayer scenarios are prepared, not yet executed. Lyra is now installed
+at GameDirectory/LyraStarterGame/LyraStarterGame. No global editor settings or
+unrelated project preferences were changed.
+
+The downloaded Lyra's DefaultEditorPerProjectUserSettings.ini already enables
+server network emulation with 30–60 ms incoming/outgoing latency and 1% packet
+loss. Disable emulation in the local Play settings for the clean baseline, then
+restore it for adverse-network checks; do not assume default PIE is lossless.
+The file also enables GameGetsMouseControl and RouteGamepadToSecondWindow.
+
+Actual map defaults: `/Game/System/DefaultEditorMap/L_DefaultEditorOverview` for
+Editor, `/Game/System/FrontEnd/Maps/L_LyraFrontEnd` for game startup. Existing
+experiences include `/ShooterMaps/Maps/L_Expanse` and `/ShooterCore/Maps/L_ShooterGym`.
+The source LyraBotCreationComponent reads `?NumBots=<count>` for game modes and,
+in Editor, LyraDeveloperSettings.bOverrideBotCount / OverrideNumPlayerBotsToSpawn.
+These are existing Lyra controls, not newly implemented gameplay. Account for
+humans plus bots when validating a six-participant match.
 
 Use Launch-Editor for interactive PIE; collect Saved/Logs afterward. Python
 commandlets cannot prove interactive PIE correctness. Rendering/screenshots require

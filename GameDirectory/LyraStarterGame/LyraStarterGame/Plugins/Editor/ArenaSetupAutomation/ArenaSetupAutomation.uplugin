@@ -1,0 +1,10 @@
+{
+    "FileVersion": 3,
+    "Version": 1,
+    "VersionName": "0.1.0",
+    "FriendlyName": "Arena Setup Automation",
+    "Description": "Editor-only setup smoke tests, shared by Lyra and the validation host.",
+    "CanContainContent": false,
+    "Modules": [{ "Name": "ArenaSetupAutomation", "Type": "Editor", "LoadingPhase": "PostEngineInit" }],
+    "Plugins": [{ "Name": "ArenaOfElements", "Enabled": true }]
+}

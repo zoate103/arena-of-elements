@@ -6,11 +6,12 @@ be installed before obtaining Unreal assets. No remote-control service is needed
 
 ## Lyra setup and daily commands
 
-After completing HUMAN_ACTION_REQUIRED.md:
+The real project is `GameDirectory/LyraStarterGame/LyraStarterGame/LyraStarterGame.uproject`.
+For a fresh Git clone, run `git lfs pull` before building. Use the installed UE 5.8
+engine and matching compiler/SDK documented in docs/setup/ENVIRONMENT.md.
 
 ```powershell
 .\Tools\Unreal\Find-Unreal.ps1
-.\Tools\Unreal\Initialize-Lyra.ps1
 .\Tools\Unreal\Build-Editor.ps1 -GenerateProjectFiles
 .\Tools\Unreal\Run-Python.ps1 -Script validate_editor.py -FullEditor
 .\Tools\Unreal\Run-Python.ps1 -Script validate_content.py
@@ -27,7 +28,8 @@ engine commands accept `-EngineRoot <directory>`. `UE_ROOT` is an optional overr
 Numeric engine associations must match; the scripts do not silently upgrade or
 downgrade a project. Registry and Epic Launcher manifests support custom locations.
 
-Initialize-Lyra copies the prepared ArenaOfElements layer, refuses differing
+Initialize-Lyra is only for a fresh official Lyra download: it copies the initial
+ArenaOfElements bootstrap layer and refuses differing
 destination files, and backs up the .uproject before enabling plugins. Re-running
 with identical files is safe. Once integrated, edit the files inside Lyra and
 retire/reconcile the staging layer rather than blindly copying over new work.
@@ -37,11 +39,16 @@ Python, EditorScriptingUtilities and ArenaSetupAutomation are editor-only.
 Build-Editor finds the Editor.Target.cs automatically; use `-Target LyraEditor`
 if a project has multiple editor targets. Close the target project's Editor
 before compiling. It uses the engine's bundled .NET and UnrealBuildTool directly.
+For a newly imported project whose source is still entirely untracked, use
+`-InitialBuild`. This applies UBT's `-DisableAdaptiveUnity` for that invocation:
+normal unity compilation remains enabled, avoiding a separate compile for every
+file classified as new by Git. Compiler warnings/errors are unchanged. Omit it
+for ordinary incremental work once the project is tracked.
 
-## Validation host while Lyra is unavailable
+## Optional isolated validation host
 
-This host proves the compiler, plugin and commands work. It is not the game and
-cannot satisfy Lyra build/startup acceptance gates.
+This host helps isolate engine/toolchain failures from Lyra. Normal work uses the
+real Lyra project above; probe success cannot replace Lyra acceptance gates.
 
 ```powershell
 $probe = '.\Tools\ValidationHost\ArenaSetupProbe.uproject'

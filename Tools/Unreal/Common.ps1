@@ -10,7 +10,7 @@ function Resolve-ArenaProject {
         $data = Get-Content -LiteralPath $_.FullName -Raw | ConvertFrom-Json
         $data.PSObject.Properties['Modules'] -and 'LyraGame' -in @($data.Modules.Name)
     })
-    if ($candidates.Count -ne 1) { throw "Expected one Lyra project under GameDirectory; found $($candidates.Count). See HUMAN_ACTION_REQUIRED.md. For a validation host, pass -Project explicitly." }
+    if ($candidates.Count -ne 1) { throw "Expected one Lyra project under GameDirectory; found $($candidates.Count). See docs/setup/NEXT_AGENT_HANDOFF.md, or pass -Project explicitly." }
     return $candidates[0].FullName
 }
 

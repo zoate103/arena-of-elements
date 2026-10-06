@@ -2,16 +2,19 @@
 
 Environment preparation only until a separate gameplay implementation request.
 Read docs/setup/SETUP_REPORT.md and NEXT_AGENT_HANDOFF.md before working.
-The intended foundation is official Lyra for UE 5.8. The validation host is NOT Lyra
-and must never be reported as a verified gameplay project.
+The actual foundation is official Lyra for UE 5.8. The validation host is a separate
+tooling probe; use the real Lyra project for all normal acceptance gates.
 
 ## Architecture
 
-Keep the imported Lyra project in GameDirectory/LyraStarterGame/, preserving Lyra module names.
+The actual project is GameDirectory/LyraStarterGame/LyraStarterGame/LyraStarterGame.uproject.
+Preserve this user-selected directory and the original Lyra module names.
 The user explicitly selected Lyra instead of the unrelated template in
 GameDirectory/Arena_of_Elements/. Preserve that template; do not commit it as Lyra.
-Until Lyra arrives, ArenaOfElements/ contains the staged feature and Python tooling.
-Use Tools/Unreal/Initialize-Lyra.ps1 to copy this layer into Lyra without overwriting assets.
+ArenaOfElements/ retains the initial bootstrap layer for the isolated validation
+host. The canonical gameplay/editing location is now inside the Lyra project.
+Do not rerun Initialize-Lyra over divergent implementation files; it intentionally
+refuses overwrites. Use that command only to bootstrap a fresh official download.
 Add game features in the Lyra project's Plugins/GameFeatures/ArenaOfElements/.
 Use server-authoritative gameplay, GAS for abilities/effects, GameplayTags for
 semantic state, and data-driven elemental rules. Keep gameplay out of UI.
