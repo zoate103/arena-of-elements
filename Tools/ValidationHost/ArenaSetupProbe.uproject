@@ -1,0 +1,14 @@
+{
+    "FileVersion": 3,
+    "EngineAssociation": "5.8",
+    "Description": "Setup validation host only. Not the Arena of Elements game or Lyra.",
+    "Modules": [{ "Name": "ArenaSetupProbe", "Type": "Runtime", "LoadingPhase": "Default" }],
+    "AdditionalPluginDirectories": ["../../ArenaOfElements/Plugins/GameFeatures", "../../ArenaOfElements/Plugins/Editor"],
+    "Plugins": [
+        { "Name": "AndroidFileServer", "Enabled": false },
+        { "Name": "ArenaOfElements", "Enabled": true },
+        { "Name": "ArenaSetupAutomation", "Enabled": true, "TargetAllowList": ["Editor"] },
+        { "Name": "PythonScriptPlugin", "Enabled": true, "TargetAllowList": ["Editor"] },
+        { "Name": "EditorScriptingUtilities", "Enabled": true, "TargetAllowList": ["Editor"] }
+    ]
+}
