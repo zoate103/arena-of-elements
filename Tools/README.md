@@ -15,6 +15,8 @@ engine and matching compiler/SDK documented in docs/setup/ENVIRONMENT.md.
 .\Tools\Unreal\Build-Editor.ps1 -GenerateProjectFiles
 .\Tools\Unreal\Run-Python.ps1 -Script validate_editor.py -FullEditor
 .\Tools\Unreal\Run-Python.ps1 -Script validate_content.py
+.\Tools\Unreal\Run-Python.ps1 -Script validate_startup_map.py -FullEditor -Isolated
+.\Tools\Unreal\Run-Python.ps1 -Script validate_startup_map.py -Render -Isolated
 .\Tools\Unreal\Run-Python.ps1 -Script automation_smoke_test.py
 .\Tools\Unreal\Run-Tests.ps1
 .\Tools\Unreal\Launch-Editor.ps1
@@ -83,6 +85,13 @@ Build timeout defaults to 3600 seconds, Python/tests to 1200; override with
 Python defaults to commandlet mode; `-FullEditor` validates full startup and the
 default map. Headless validation uses NullRHI; add `-Render` for rendering tests.
 Neither headless tests nor a process launching prove visual quality or PIE.
+The Lyra-only validate_startup_map.py explicitly loads the overview map and
+NE_ImpactSparks emitter without saving either; validate_editor.py alone does not
+prove that those assets load. Use -Isolated when another editor is open: it sends
+Saved/Intermediate and user settings to that run's UserData directory, avoiding
+the interactive editor's search database lock. Project Source/Config/Content are
+unchanged. See docs/setup/NIAGARA_STARTUP_2026-10-07.md for the observed startup
+crash, serial editor-loading mitigation and graphical-run diagnostics.
 Automation processes set `-culture=en` for deterministic engine self-test string
 comparisons. This does not change the user's normal editor/system language.
 

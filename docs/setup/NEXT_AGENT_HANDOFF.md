@@ -30,6 +30,7 @@ the actual project and associated engine; no manual path substitution is needed.
 .\Tools\Unreal\Build-Editor.ps1 -GenerateProjectFiles
 .\Tools\Unreal\Run-Python.ps1 -Script validate_editor.py -FullEditor
 .\Tools\Unreal\Run-Python.ps1 -Script validate_content.py
+.\Tools\Unreal\Run-Python.ps1 -Script validate_startup_map.py -FullEditor -Isolated
 .\Tools\Unreal\Run-Python.ps1 -Script automation_smoke_test.py
 .\Tools\Unreal\Run-Tests.ps1
 .\Tools\Unreal\Collect-Logs.ps1
@@ -65,6 +66,14 @@ GameFeatureData asset. Create and register that asset and integrate a Lyra exper
 as part of the separate gameplay implementation, using supported editor APIs.
 
 ## Validation boundaries and known limitations
+
+2026-10-07: a graphical startup crashed in NiagaraEditor with unresolved pins in
+NE_ImpactSparks. EditorStreamingSettings now disables the async loading thread
+and multithreaded loading for the editor only. This is a mitigation for suspected
+load-order sensitivity, not proof of a deterministic engine root cause. A restart
+with the original settings also succeeded. Existing editor processes retain their
+startup settings until restarted; do not close user work without preserving it.
+Read NIAGARA_STARTUP_2026-10-07.md for exact evidence and remaining diagnostics.
 
 Actual Lyra build/startup/Python/test evidence is recorded in SETUP_REPORT.md.
 The initial isolated probe remains useful for diagnosis but is not the selected

@@ -8,7 +8,9 @@
 *.code-workspace
 **/.ignore
 **/Build/Scripts/**/obj/
+**/Build/Scripts/**/uatobj/
 **/Build/Scripts/**/bin/
+/GameDirectory/LyraStarterGame/LyraStarterGame/Build/Scripts/Lyra.Automation.csproj.props
 *.sln
 *.suo
 *.VC.db

@@ -11,6 +11,9 @@
     <WarningsNotAsErrors>612,618</WarningsNotAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <!-- UAT and direct SDK builds use different intermediate directories. Neither
+         directory's generated C# belongs in the default source glob. -->
+    <Compile Remove="obj\**\*.cs;uatobj\**\*.cs;bin\**\*.cs" />
     <ProjectReference Include="$(EngineDir)\Source\Programs\AutomationTool\AutomationUtils\AutomationUtils.Automation.csproj" />
     <ProjectReference Include="$(EngineDir)\Source\Programs\AutomationTool\CrowdinLocalization\CrowdinLocalization.Automation.csproj" />
     <ProjectReference Include="$(EngineDir)\Source\Programs\AutomationTool\Localization\Localization.Automation.csproj" />

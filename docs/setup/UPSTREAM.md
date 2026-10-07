@@ -28,6 +28,13 @@ Android connection token was removed from tracked config; original config and
 project descriptors have ignored local backups. Commented EOS placeholders remain
 placeholders; no account credentials were supplied or configured by setup.
 
+The 2026-10-07 startup mitigation additionally disables async/multithreaded editor
+loading in DefaultEngine.ini; packaged-runtime streaming settings are unchanged.
+See NIAGARA_STARTUP_2026-10-07.md. No Niagara asset was replaced or resaved.
+Lyra.Automation.csproj also excludes generated obj/uatobj/bin C# files to prevent
+duplicate assembly attributes. Generated uatobj and machine-specific project
+props are kept local and excluded from the shared baseline.
+
 Lyra core source, maps and existing gameplay assets are preserved. Bootstrap
 templates remain in ArenaOfElements for the separate probe; gameplay work belongs
 inside the real Lyra project. Large Unreal assets and the sample replay use LFS.

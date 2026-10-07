@@ -1,6 +1,6 @@
 #Requires -Version 7.0
 [CmdletBinding()]
-param([Parameter(Mandatory)][string]$Script, [string]$Project, [string]$EngineRoot, [switch]$FullEditor, [switch]$Render, [int]$TimeoutSeconds=1200)
+param([Parameter(Mandatory)][string]$Script, [string]$Project, [string]$EngineRoot, [switch]$FullEditor, [switch]$Render, [switch]$Isolated, [int]$TimeoutSeconds=1200)
 . "$PSScriptRoot/Common.ps1"
 $Project = Resolve-ArenaProject $Project
 $ue = Resolve-ArenaEngine $Project $EngineRoot
@@ -19,6 +19,13 @@ runpy.run_path($pyPath, run_name='__main__')
 unreal.log('ARENA_PYTHON_COMPLETED_SUCCESSFULLY')
 "@ | Set-Content -LiteralPath $wrapper -Encoding utf8
 $arguments = @($Project, '-unattended', '-nop4', '-nosplash', '-stdout', '-FullStdOutLogOutput', '-culture=en', '-LogCmds=LogAutomationTest Log', "-abslog=$log")
+if ($Isolated) {
+    # Keep the automation process's Saved/Search database and user settings separate
+    # from an interactive editor already using this project. Source/Content stay put.
+    $userDir = Join-Path $evidence 'UserData'
+    New-Item -ItemType Directory -Path $userDir | Out-Null
+    $arguments += "-UserDir=$userDir"
+}
 if (!$Render) { $arguments += '-NullRHI' }
 if ($FullEditor) { $arguments += "-ExecutePythonScript=$wrapper" }
 else { $arguments += @('-run=pythonscript', "-script=$wrapper") }

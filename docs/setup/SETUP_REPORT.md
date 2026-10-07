@@ -1,5 +1,12 @@
 # Setup Summary
 
+Follow-up 2026-10-07: the first interactive graphical start crashed in NiagaraEditor.
+The original headless checks did not establish graphical startup reliability.
+Serial editor loading and an explicit startup-map/emitter validator were added.
+See [the incident report](NIAGARA_STARTUP_2026-10-07.md) for mitigation evidence,
+the successful warm restart and remaining non-Niagara diagnostics. Results below
+are the original 2026-10-06 setup baseline, not a claim that the crash never occurred.
+
 2026-10-06, Europe/Vienna. Official Lyra 5.8 is integrated and the autonomous
 Unreal development setup passes all applicable acceptance gates on the actual
 Lyra project. This is environment/tooling preparation only; no Arena gameplay.
